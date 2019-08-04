@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './layout/Header';
-import TodoList from './components/TodoList';
-import Footer from './layout/Footer';
+import Body from './layout/Body';
+import Paper from '@material-ui/core/Paper';
 
 class App extends React.Component {
     render() {
@@ -11,12 +11,9 @@ class App extends React.Component {
                 <div>
                     <Header />
                 </div>
-                <div>
-                    <TodoList />
-                </div>
-                <div>
-                    <Footer />
-                </div>
+                <Paper>
+                    <Body />
+                </Paper>
             </div>
         )
     }
