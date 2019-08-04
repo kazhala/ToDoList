@@ -1,15 +1,28 @@
 import React from 'react';
+import shortid from 'shortid';
+
 
 export default class TodoForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: "ss",
+            text: "",
         };
     }
-    handleChange = e => {
+    handleChange = (e) => {
         this.setState({
             text: e.target.value,
+        });
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.handleSubmit({
+            key: shortid.generate(),
+            text: this.state.text,
+            complete: false,
+        });
+        this.setState({
+            text: "",
         });
     }
 
@@ -17,8 +30,14 @@ export default class TodoForm extends React.Component {
     render() {
         return (
             <div>
-                <input value={this.state.value} placeholder="Enter todos..." onChange={this.handleChange} />
-                <input placeholder={this.state.text} />
+                <form onSubmit={this.handleSubmit}>
+                    <input
+                        value={this.state.text}
+                        placeholder="Enter todo.."
+                        onChange={this.handleChange}
+                    />
+                    <button>submit</button>
+                </form>
             </div>
         );
     }
