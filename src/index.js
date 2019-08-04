@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './layout/Header';
-import Body from './layout/Body';
+import TodoList from './layout/TodoList';
 import Paper from '@material-ui/core/Paper';
 
 class App extends React.Component {
@@ -12,7 +12,7 @@ class App extends React.Component {
                     <Header />
                 </div>
                 <Paper>
-                    <Body />
+                    <TodoList />
                 </Paper>
             </div>
         )
