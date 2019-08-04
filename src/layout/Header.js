@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 export default class Header extends React.Component {
     render() {
         return (
-            <AppBar>
+            <AppBar position="static">
                 <Toolbar>
                     <Grid container spacing={0}>
                         <Grid item xs={10}>
