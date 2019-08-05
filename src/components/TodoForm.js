@@ -6,23 +6,26 @@ export default class TodoForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: "",
-        };
+            text: '',
+        }
     }
-    handleChange = (e) => {
+
+    handleChange = e => {
         this.setState({
             text: e.target.value,
         });
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.handleSubmit({
+        const todo = {
             key: shortid.generate(),
-            text: this.state.text,
+            spec: this.state.text,
             complete: false,
-        });
+        }
+        this.props.onSubmit(todo)
         this.setState({
-            text: "",
+            text: '',
         });
     }
 
@@ -33,10 +36,10 @@ export default class TodoForm extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <input
                         value={this.state.text}
-                        placeholder="Enter todo.."
                         onChange={this.handleChange}
+                        placeholder="todo..."
                     />
-                    <button>submit</button>
+                    <button onClick={this.handleSubmit}>add to task</button>
                 </form>
             </div>
         );

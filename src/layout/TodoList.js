@@ -1,25 +1,53 @@
 import React from 'react';
 import TodoForm from '../components/TodoForm';
+import Todo from '../components/Todo';
 
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos: [],
+            task: [],
+            display: "all",
         };
     }
-    addtolist = todo => {
-        let tasktodo = this.state.todos.slice();
-        tasktodo.unshift(todo);
+
+    addTask = (todo) => {
+        let newTask = this.state.task.slice();
+        newTask.unshift(todo);
         this.setState({
-            todos: tasktodo,
+            task: newTask,
+        });
+    }
+
+    handleComplete = id => {
+        this.setState({
+            task: this.state.task.map(todo => {
+                if (todo.id === id) {
+                    return ({
+                        id: todo.id,
+                        spec: todo.spec,
+                        complete: !todo.complete,
+                    });
+                } else {
+                    return todo;
+                }
+            })
         });
     }
 
 
     render() {
         return (
-            <TodoForm onSubmit={this.addtolist} />
+            <div>
+                <TodoForm onSubmit={this.addTask} />
+                {this.state.task.map(todo => (
+                    <Todo
+                        id={todo.id}
+                        spec={todo.spec}
+                        complete={todo.complete}
+                    />
+                ))}
+            </div>
         );
     }
 }
