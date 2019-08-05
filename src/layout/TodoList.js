@@ -19,12 +19,12 @@ export default class TodoList extends React.Component {
         });
     }
 
-    handleComplete = id => {
+    handleComplete = (key) => {
         this.setState({
             task: this.state.task.map(todo => {
-                if (todo.id === id) {
+                if (todo.key === key) {
                     return ({
-                        id: todo.id,
+                        key: todo.key,
                         spec: todo.spec,
                         complete: !todo.complete,
                     });
@@ -35,18 +35,35 @@ export default class TodoList extends React.Component {
         });
     }
 
+    handleDisplay = (display) => {
+        this.setState({
+            display: display,
+        });
+    }
+
 
     render() {
+        let displaytodo = [];
+        if (this.state.display === "all") {
+            displaytodo = this.state.task.slice();
+        } else if (this.state.display === "unfinished") {
+            displaytodo = this.state.task.filter(todo => !todo.complete);
+        } else if (this.state.display === "completed") {
+            displaytodo = this.state.task.filter(todo => todo.complete);
+        }
         return (
             <div>
                 <TodoForm onSubmit={this.addTask} />
-                {this.state.task.map(todo => (
+                {displaytodo.map(todo => (
                     <Todo
-                        id={todo.id}
-                        spec={todo.spec}
-                        complete={todo.complete}
+                        key={todo.key}
+                        todo={todo}
+                        onComplete={() => this.handleComplete(todo.key)}
                     />
                 ))}
+                <button onClick={() => this.handleDisplay("all")}>All task</button>
+                <button onClick={() => this.handleDisplay("unfinished")}>On going tasks</button>
+                <button onClick={() => this.handleDisplay("completed")}>Completed</button>
             </div>
         );
     }

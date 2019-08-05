@@ -3,9 +3,13 @@ import React from 'react';
 export default class Todo extends React.Component {
     render() {
         return (
-            <div>
-                {this.props.spec}
-                <button>Complete</button>
+            <div
+                style={{
+                    textDecoration: this.props.todo.complete ? "line-through" : ""
+                }}
+            >
+                {this.props.todo.spec}
+                <button onClick={this.props.onComplete}>Complete</button>
             </div>
         );
     }
