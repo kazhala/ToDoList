@@ -5,7 +5,7 @@ export default class Todo extends React.Component {
         return (
             <div>
                 {this.props.spec}
-                <button>complete</button>
+                <button>Complete</button>
             </div>
         );
     }
