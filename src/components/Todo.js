@@ -4,7 +4,7 @@ export default class Todo extends React.Component {
     render() {
         let remove = "";
         let option = "Complete";
-        if (this.props.display === "completed") {
+        if (this.props.todo.complete === true) {
             remove = (<button onClick={this.props.onRemove}>Remove</button>);
             option = "revoke";
         }
