@@ -7,7 +7,7 @@ export default class TodoList extends React.Component {
         super(props);
         this.state = {
             task: [],
-            display: "all",
+            display: "unfinished",
         };
     }
 
@@ -41,12 +41,19 @@ export default class TodoList extends React.Component {
         });
     }
 
+    handleRemove = (todo) => {
+        let temptask = this.state.task.slice();
+        let index = temptask.indexOf(todo);
+        temptask.splice(index, 1);
+        this.setState({
+            task: temptask,
+        });
+    }
+
 
     render() {
         let displaytodo = [];
-        if (this.state.display === "all") {
-            displaytodo = this.state.task.slice();
-        } else if (this.state.display === "unfinished") {
+        if (this.state.display === "unfinished") {
             displaytodo = this.state.task.filter(todo => !todo.complete);
         } else if (this.state.display === "completed") {
             displaytodo = this.state.task.filter(todo => todo.complete);
@@ -59,9 +66,10 @@ export default class TodoList extends React.Component {
                         key={todo.key}
                         todo={todo}
                         onComplete={() => this.handleComplete(todo.key)}
+                        display={this.state.display}
+                        onRemove={() => this.handleRemove(todo)}
                     />
                 ))}
-                <button onClick={() => this.handleDisplay("all")}>All task</button>
                 <button onClick={() => this.handleDisplay("unfinished")}>On going tasks</button>
                 <button onClick={() => this.handleDisplay("completed")}>Completed</button>
             </div>
