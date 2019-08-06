@@ -8,6 +8,12 @@ import Grid from '@material-ui/core/Grid';
 
 
 export default class Header extends React.Component {
+    handleChange = (e) => {
+        let searchvalue = e.target.value;
+        this.props.onChange(searchvalue);
+    }
+
+
     render() {
         return (
             <AppBar position="static">
@@ -21,7 +27,11 @@ export default class Header extends React.Component {
                         <Grid item xs={2}>
                             <div>
                                 <SearchIcon />
-                                <InputBase placeholder="search" />
+                                <InputBase
+                                    defaultValue=""
+                                    onChange={this.handleChange}
+                                    placeholder="search"
+                                />
                             </div>
                         </Grid>
                     </Grid>

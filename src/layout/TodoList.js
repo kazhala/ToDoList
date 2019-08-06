@@ -50,13 +50,26 @@ export default class TodoList extends React.Component {
         });
     }
 
+    exeSearch = (search) => {
+        let displayarr = [];
+        this.state.task.map((todo, index) => {
+            if (todo.spec.includes(search)) {
+                displayarr.unshift(todo);
+            }
+        });
+        return displayarr;
+    }
 
     render() {
         let displaytodo = [];
-        if (this.state.display === "unfinished") {
-            displaytodo = this.state.task.filter(todo => !todo.complete);
-        } else if (this.state.display === "completed") {
-            displaytodo = this.state.task.filter(todo => todo.complete);
+        if (this.props.search !== "") {
+            displaytodo = this.exeSearch(this.props.search);
+        } else if (this.props.search === "") {
+            if (this.state.display === "unfinished") {
+                displaytodo = this.state.task.filter(todo => !todo.complete);
+            } else if (this.state.display === "completed") {
+                displaytodo = this.state.task.filter(todo => todo.complete);
+            }
         }
         return (
             <div>
