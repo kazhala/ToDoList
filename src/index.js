@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './layout/Header';
 import TodoList from './layout/TodoList';
-import Paper from '@material-ui/core/Paper';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,14 +11,11 @@ class App extends React.Component {
         };
     }
 
-
-
     handleChange = (searchvalue) => {
         this.setState({
             search: searchvalue
         });
     }
-
 
     render() {
         return (
@@ -27,9 +23,9 @@ class App extends React.Component {
                 <div>
                     <Header onChange={this.handleChange} />
                 </div>
-                <Paper>
+                <div>
                     <TodoList search={this.state.search} />
-                </Paper>
+                </div>
             </div>
         )
     }

@@ -1,6 +1,11 @@
 import React from 'react';
 import TodoForm from '../components/TodoForm';
 import Todo from '../components/Todo';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
+
 
 export default class TodoList extends React.Component {
     constructor(props) {
@@ -73,18 +78,46 @@ export default class TodoList extends React.Component {
         }
         return (
             <div>
-                <TodoForm onSubmit={this.addTask} />
-                {displaytodo.map(todo => (
-                    <Todo
-                        key={todo.key}
-                        todo={todo}
-                        onComplete={() => this.handleComplete(todo.key)}
-                        display={this.state.display}
-                        onRemove={() => this.handleRemove(todo)}
-                    />
-                ))}
-                <button onClick={() => this.handleDisplay("unfinished")}>On going tasks</button>
-                <button onClick={() => this.handleDisplay("completed")}>Completed</button>
+                <Grid
+                    container
+                    justify="center"
+                >
+                    <Grid item>
+                        <Button
+                            color="primary"
+                            onClick={() => this.handleDisplay("unfinished")}
+                        >
+                            <Typography variant="h5">
+                                On going tasks
+                            </Typography>
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button
+                            color="primary"
+                            onClick={() => this.handleDisplay("completed")}
+                        >
+                            <Typography variant="h5">
+                                Completed tasks
+                            </Typography>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <div>
+                    <TodoForm onSubmit={this.addTask} />
+                </div>
+                <div>
+                    {displaytodo.map(todo => (
+                        <Todo
+                            key={todo.key}
+                            todo={todo}
+                            onComplete={() => this.handleComplete(todo.key)}
+                            display={this.state.display}
+                            onRemove={() => this.handleRemove(todo)}
+                        />
+                    ))}
+                </div>
+
             </div>
         );
     }
