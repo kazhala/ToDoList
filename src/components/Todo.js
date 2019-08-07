@@ -15,8 +15,13 @@ export default class Todo extends React.Component {
         }
         return (
             <Card style={{ maxWidth: "200" }}>
-                <CardContent style={{ maxWidth: "200" }}>
-                    <Typography variant="body1" style={{ textDecoration: this.props.todo.complete ? "line-through" : "" }}>
+                <CardContent style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word"
+                }}>
+                    <Typography variant="body1" style={{
+                        textDecoration: this.props.todo.complete ? "line-through" : ""
+                    }}>
                         {this.props.todo.spec}
                     </Typography>
                 </CardContent>
