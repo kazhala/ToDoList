@@ -5,17 +5,19 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-
-
+//display all the created task
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
+        //store tasks in an array
+        //display for display option control
         this.state = {
             task: [],
             display: "unfinished",
         };
     }
 
+    //add task, copy the array from state, modify then set state
     addTask = (todo) => {
         let newTask = this.state.task.slice();
         newTask.unshift(todo);
@@ -24,6 +26,7 @@ export default class TodoList extends React.Component {
         });
     }
 
+    //handle the completed taks, mark them as completed
     handleComplete = (key) => {
         this.setState({
             task: this.state.task.map(todo => {

@@ -5,7 +5,7 @@ import TodoList from './layout/TodoList';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-
+//index component to display the page to html
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,8 @@ class App extends React.Component {
             search: ""
         };
     }
-
+    //added search space for search function
+    //search form and display list is from two components
     handleChange = (searchvalue) => {
         this.setState({
             search: searchvalue
