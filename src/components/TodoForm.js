@@ -41,7 +41,7 @@ export default class TodoForm extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <Grid container xs={12}>
-                        <Grid item xs={4}></Grid>
+                        <Grid item xs={3}></Grid>
                         <Grid item>
                             <TextField
                                 variant="outlined"
@@ -49,13 +49,13 @@ export default class TodoForm extends React.Component {
                                 onChange={this.handleChange}
                                 placeholder="Enter tasks..."
                                 required
-                                style={{ width: 300 }}
+                                style={{ width: 330 }}
                             />
                         </Grid>
                         <Grid item>
                             <Button
                                 color="secondary"
-                                onClick={this.handleSubmit}
+                                type="submit"
                                 style={{ maxWidth: '100px', maxHeight: '55px', minWidth: '100px', minHeight: '55px' }}
                             >
                                 add to task

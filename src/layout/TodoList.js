@@ -82,7 +82,8 @@ export default class TodoList extends React.Component {
                     container
                     justify="center"
                 >
-                    <Grid item>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={3}>
                         <Button
                             color="primary"
                             onClick={() => this.handleDisplay("unfinished")}
@@ -92,7 +93,8 @@ export default class TodoList extends React.Component {
                             </Typography>
                         </Button>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={4}>
                         <Button
                             color="primary"
                             onClick={() => this.handleDisplay("completed")}
@@ -102,20 +104,26 @@ export default class TodoList extends React.Component {
                             </Typography>
                         </Button>
                     </Grid>
+                    <Grid item xs={2}></Grid>
                 </Grid>
                 <div>
                     <TodoForm onSubmit={this.addTask} />
                 </div>
                 <div>
-                    {displaytodo.map(todo => (
-                        <Todo
-                            key={todo.key}
-                            todo={todo}
-                            onComplete={() => this.handleComplete(todo.key)}
-                            display={this.state.display}
-                            onRemove={() => this.handleRemove(todo)}
-                        />
-                    ))}
+                    <Grid container xs={12} justify="flex-start">
+                        {displaytodo.map(todo => (
+                            <Grid item xs={3}>
+                                <Todo
+                                    key={todo.key}
+                                    todo={todo}
+                                    onComplete={() => this.handleComplete(todo.key)}
+                                    display={this.state.display}
+                                    onRemove={() => this.handleRemove(todo)}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+
                 </div>
 
             </div>

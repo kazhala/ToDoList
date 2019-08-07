@@ -19,20 +19,24 @@ export default class Header extends React.Component {
             <AppBar position="static">
                 <Toolbar>
                     <Grid container spacing={0}>
-                        <Grid item xs={10}>
+                        <Grid item xs={8}>
                             <Typography variant="h6" noWrap>
                                 Task Helper
                             </Typography>
                         </Grid>
-                        <Grid item xs={2}>
-                            <div>
-                                <SearchIcon />
-                                <InputBase
-                                    defaultValue=""
-                                    onChange={this.handleChange}
-                                    placeholder="search"
-                                />
-                            </div>
+                        <Grid item xs={4}>
+                            <Grid container>
+                                <Grid item>
+                                    <SearchIcon />
+                                </Grid>
+                                <Grid item>
+                                    <InputBase
+                                        defaultValue=""
+                                        onChange={this.handleChange}
+                                        placeholder="search"
+                                    />
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Toolbar>
