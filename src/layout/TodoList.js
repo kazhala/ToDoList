@@ -73,22 +73,35 @@ export default class TodoList extends React.Component {
     }
 
     //handle complete all function, change all task to completed
-    handleAll = () => {
-        let allArr = [];
-        allArr = this.state.task.map(todo => {
-            if (!todo.complete) {
-                return ({
-                    key: todo.key,
-                    spec: todo.spec,
-                    complete: !todo.complete
-                });
-            } else {
-                return todo;
-            }
-        });
-        this.setState({
-            task: allArr,
-        });
+    handleAll = (option) => {
+        if (option === "complete") {
+            let allArr = [];
+            allArr = this.state.task.map(todo => {
+                if (!todo.complete) {
+                    return ({
+                        key: todo.key,
+                        spec: todo.spec,
+                        complete: !todo.complete
+                    });
+                } else {
+                    return todo;
+                }
+            });
+            this.setState({
+                task: allArr,
+            });
+        } else if (option === "remove") {
+            let removetask = [];
+            this.state.task.map(todo => {
+                if (!todo.complete) {
+                    removetask.unshift(todo);
+                }
+            });
+            this.setState({
+                task: removetask,
+            });
+        }
+
     }
 
     render() {
