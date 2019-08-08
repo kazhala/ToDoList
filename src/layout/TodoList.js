@@ -43,12 +43,14 @@ export default class TodoList extends React.Component {
         });
     }
 
+    //change the display in state to the given parameter
     handleDisplay = (display) => {
         this.setState({
             display: display,
         });
     }
 
+    //using the splice to remove the exact object from task array
     handleRemove = (todo) => {
         let temptask = this.state.task.slice();
         let index = temptask.indexOf(todo);
@@ -58,6 +60,8 @@ export default class TodoList extends React.Component {
         });
     }
 
+    //handle search function
+    //search for all the task if the given parameter is a sub string
     exeSearch = (search) => {
         let displayarr = [];
         this.state.task.map((todo, index) => {
@@ -68,7 +72,28 @@ export default class TodoList extends React.Component {
         return displayarr;
     }
 
+    //handle complete all function, change all task to completed
+    handleAll = () => {
+        let allArr = [];
+        allArr = this.state.task.map(todo => {
+            if (!todo.complete) {
+                return ({
+                    key: todo.key,
+                    spec: todo.spec,
+                    complete: !todo.complete
+                });
+            } else {
+                return todo;
+            }
+        });
+        this.setState({
+            task: allArr,
+        });
+    }
+
     render() {
+        //if search is empty, display based on display option
+        //if search contains a string, display only the task that contains the substring
         let displaytodo = [];
         if (this.props.search !== "") {
             displaytodo = this.exeSearch(this.props.search);
@@ -110,7 +135,12 @@ export default class TodoList extends React.Component {
                     <Grid item xs={2}></Grid>
                 </Grid>
                 <div>
-                    <TodoForm onSubmit={this.addTask} />
+                    <TodoForm
+                        task={this.state.task}
+                        display={this.state.display}
+                        onSubmit={this.addTask}
+                        completeAll={this.handleAll}
+                    />
                 </div>
                 <div>
                     <Grid container xs={12} justify="flex-start">

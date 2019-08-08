@@ -3,6 +3,7 @@ import shortid from 'shortid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 
 export default class TodoForm extends React.Component {
     constructor(props) {
@@ -37,6 +38,25 @@ export default class TodoForm extends React.Component {
 
 
     render() {
+        let task = this.props.task;
+        let display = this.props.display;
+        let allB = <div></div>;
+        if (task.length > 0) {
+            if (display === "unfinished") {
+                allB = (
+                    <Button
+                        color="secondary"
+                        onClick={this.props.completeAll}
+                        style={{ maxWidth: '100px', maxHeight: '55px', minWidth: '100px', minHeight: '55px' }}
+                    >
+                        Complete all
+                </Button>
+                );
+            }
+
+
+
+        }
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -50,6 +70,7 @@ export default class TodoForm extends React.Component {
                                 placeholder="Enter tasks..."
                                 required
                                 style={{ width: 330 }}
+                                inputProps={{ maxLength: 120 }}
                             />
                         </Grid>
                         <Grid item>
@@ -60,6 +81,9 @@ export default class TodoForm extends React.Component {
                             >
                                 add to task
                             </Button>
+                        </Grid>
+                        <Grid item>
+                            {allB}
                         </Grid>
                     </Grid>
 
