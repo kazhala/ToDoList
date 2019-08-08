@@ -73,6 +73,7 @@ export default class TodoList extends React.Component {
     }
 
     //handle complete all function, change all task to completed
+    //handle remove all function, only keep all the uncompleted function
     handleAll = (option) => {
         if (option === "complete") {
             let allArr = [];
@@ -119,12 +120,14 @@ export default class TodoList extends React.Component {
         }
         return (
             <div>
+                {/* Grid to organise position and spaces */}
                 <Grid
                     container
                     justify="center"
                 >
                     <Grid item xs={2}></Grid>
                     <Grid item xs={3}>
+                        {/* button for display option on going task */}
                         <Button
                             color="primary"
                             onClick={() => this.handleDisplay("unfinished")}
@@ -134,6 +137,7 @@ export default class TodoList extends React.Component {
                             </Typography>
                         </Button>
                     </Grid>
+                    {/* Extra grid for spacing of two button on the same line*/}
                     <Grid item xs={1}></Grid>
                     <Grid item xs={4}>
                         <Button
@@ -148,6 +152,7 @@ export default class TodoList extends React.Component {
                     <Grid item xs={2}></Grid>
                 </Grid>
                 <div>
+                    {/* Todo form component to handle input */}
                     <TodoForm
                         task={this.state.task}
                         display={this.state.display}
@@ -156,6 +161,7 @@ export default class TodoList extends React.Component {
                     />
                 </div>
                 <div>
+                    {/* Display the list of task in this div */}
                     <Grid container xs={12} justify="flex-start">
                         {displaytodo.map(todo => (
                             <Grid item xs={3}>

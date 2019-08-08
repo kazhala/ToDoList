@@ -56,7 +56,7 @@ export default class TodoForm extends React.Component {
                     >
                         Complete all
                 </Button>
-                );
+                ); //if display option is completed task, change complet all button to remove all button
             } else if (display === "completed") {
                 allB = (
                     <Button
@@ -95,6 +95,7 @@ export default class TodoForm extends React.Component {
                             </Button>
                         </Grid>
                         <Grid item>
+                            {/* Only display this button when there's at least one task entered */}
                             {allB}
                         </Grid>
                     </Grid>

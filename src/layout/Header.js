@@ -6,8 +6,9 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
 
-
+//This component is resposible for the app bar at the top of the webpage
 export default class Header extends React.Component {
+    //response to change when user input in the search field
     handleChange = (e) => {
         let searchvalue = e.target.value;
         this.props.onChange(searchvalue);
