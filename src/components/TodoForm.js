@@ -82,7 +82,7 @@ export default class TodoForm extends React.Component {
                                 placeholder="Enter tasks..."
                                 required
                                 style={{ width: 330 }}
-                                inputProps={{ maxLength: 120 }}
+                                inputProps={{ maxLength: 104 }}
                             />
                         </Grid>
                         <Grid item>
