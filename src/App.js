@@ -6,20 +6,6 @@ import Container from '@material-ui/core/Container';
 
 //index component to display the page to html
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: ""
-        };
-    }
-    //added search space for search function
-    //search form and display list is from two components
-    handleChange = (searchvalue) => {
-        this.setState({
-            search: searchvalue
-        });
-    }
-
     render() {
         return (
             <div style={{ backgroundColor: '#cfe8fc', minHeight: "100vh" }} >
@@ -28,7 +14,7 @@ class App extends React.Component {
                     maxWidth="md"
                 >
                     <div>
-                        <Header onChange={this.handleChange} />
+                        <Header onChange={this.props.handleSearch} />
                     </div>
                     <div>
                         <TodoListContainer />

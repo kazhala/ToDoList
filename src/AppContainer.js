@@ -14,3 +14,11 @@ const mapStateToProps = state => {
         search: state.search
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleSearch: () => dispatch({ type: actionTypes.UPDATE_SEARCH, payload: { search: search } })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

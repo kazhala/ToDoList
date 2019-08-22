@@ -12,7 +12,7 @@ const TodoListContainer = props => {
 const mapStateToProps = state => {
     return {
         task: state.task,
-        search: '',
+        search: state.search,
     }
 }
 

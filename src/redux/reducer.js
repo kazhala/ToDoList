@@ -62,6 +62,11 @@ const reducer = (state = initialstate, action) => {
                 ...state,
                 task: allArr
             }
+        case actionTypes.UPDATE_SEARCH:
+            return {
+                ...state,
+                search: action.payload.search
+            }
     }
     return state;
 };
