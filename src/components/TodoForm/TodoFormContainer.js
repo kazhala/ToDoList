@@ -41,7 +41,7 @@ const TodoFormContainer = props => {
 
 const mapStateToProps = state => {
     return {
-        text: state.text,
+        text: state.textReducer.text,
     }
 }
 

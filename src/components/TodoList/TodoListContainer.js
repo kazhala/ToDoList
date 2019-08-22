@@ -31,9 +31,9 @@ const exeSearch = (search, task) => {
 
 const mapStateToProps = state => {
     return {
-        task: state.task,
-        search: state.search,
-        display: state.display,
+        task: state.taskReducer.task,
+        search: state.searchReducer.search,
+        display: state.displayReducer.display,
     }
 }
 

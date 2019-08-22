@@ -1,10 +1,7 @@
-import * as actionTypes from './types';
+import * as actionTypes from '../types';
 
 const initialstate = {
     task: [],
-    search: '',
-    display: 'unfinished',
-    text: '',
 };
 
 const reducer = (state = initialstate, action) => {
@@ -64,27 +61,6 @@ const reducer = (state = initialstate, action) => {
                 ...state,
                 task: allArr
             }
-        case actionTypes.UPDATE_SEARCH:
-            return {
-                ...state,
-                search: action.payload.search
-            }
-        case actionTypes.CHANGE_DISPLAY:
-            return {
-                ...state,
-                display: action.payload.display
-            }
-        case actionTypes.UPDATE_TEXT:
-            return {
-                ...state,
-                text: action.payload.text
-            }
-        case actionTypes.RESET_TEXT:
-            return {
-                ...state,
-                text: ''
-            }
-
     }
     return state;
 };

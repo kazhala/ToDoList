@@ -11,7 +11,7 @@ const AppContainer = props => {
 
 const mapStateToProps = state => {
     return {
-        search: state.search
+        search: state.searchReducer.search
     }
 }
 
