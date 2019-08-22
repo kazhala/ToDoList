@@ -4,48 +4,12 @@ import Todo from '../Todo/Todo';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import TodoFormContainer from '../TodoForm/TodoFormContainer';
 
 
 //display all the created task
 class TodoList extends React.Component {
-    state = {
-        display: "unfinished",
-    }
-
-    //change the display in state to the given parameter
-    handleDisplay = (display) => {
-        this.setState({
-            display: display,
-        });
-    }
-
-    //handle search function
-    //search for all the task if the given parameter is a sub string
-
-    exeSearch = (search) => {
-        let displayarr = [];
-        this.props.task.map((todo, index) => {
-            if (todo.spec.includes(search)) {
-                displayarr.unshift(todo);
-            }
-        });
-        return displayarr;
-    }
-
-
     render() {
-        //if search is empty, display based on display option
-        //if search contains a string, display only the task that contains the substring
-        let displaytodo = [];
-        if (this.props.search !== "") {
-            displaytodo = this.exeSearch(this.props.search);
-        } else if (this.props.search === "") {
-            if (this.state.display === "unfinished") {
-                displaytodo = this.props.task.filter(todo => !todo.complete);
-            } else if (this.state.display === "completed") {
-                displaytodo = this.props.task.filter(todo => todo.complete);
-            }
-        }
         return (
             <div>
                 {/* Grid to organise position and spaces */}
@@ -58,7 +22,7 @@ class TodoList extends React.Component {
                         {/* button for display option on going task */}
                         <Button
                             color="primary"
-                            onClick={() => this.handleDisplay("unfinished")}
+                            onClick={() => this.props.handleDisplay("unfinished")}
                         >
                             <Typography variant="h5">
                                 On going tasks
@@ -70,7 +34,7 @@ class TodoList extends React.Component {
                     <Grid item xs={4}>
                         <Button
                             color="primary"
-                            onClick={() => this.handleDisplay("completed")}
+                            onClick={() => this.props.handleDisplay("completed")}
                         >
                             <Typography variant="h5">
                                 Completed tasks
@@ -81,23 +45,23 @@ class TodoList extends React.Component {
                 </Grid>
                 <div>
                     {/* Todo form component to handle input */}
-                    <TodoForm
+                    <TodoFormContainer
                         task={this.props.task}
-                        display={this.state.display}
+                        display={this.props.display}
                         onSubmit={this.props.addTask}
                         completeAll={this.props.handleAll}
                     />
                 </div>
                 <div>
                     {/* Display the list of task in this div */}
-                    <Grid container xs={12} justify="flex-start">
-                        {displaytodo.map(todo => (
+                    <Grid container justify="flex-start">
+                        {this.props.displaytodo.map(todo => (
                             <Grid item xs={3}>
                                 <Todo
                                     key={todo.key}
                                     todo={todo}
                                     onComplete={() => this.props.completeTask(todo.key)}
-                                    display={this.state.display}
+                                    display={this.props.display}
                                     onRemove={() => this.props.removeTask(todo)}
                                 />
                             </Grid>

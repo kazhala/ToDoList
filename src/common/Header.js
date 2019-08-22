@@ -17,10 +17,6 @@ const handleChange = (e, props) => {
 
 //This component is resposible for the app bar at the top of the webpage
 export default class Header extends React.Component {
-    state = {
-        headSearch: '',
-    }
-
     render() {
         return (
             <AppBar position="static">

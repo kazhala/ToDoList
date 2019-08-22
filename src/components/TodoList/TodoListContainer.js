@@ -4,15 +4,36 @@ import { connect } from 'react-redux';
 import TodoList from './TodoList';
 
 const TodoListContainer = props => {
+    let displaytodo = [];
+    if (props.search !== "") {
+        displaytodo = exeSearch(props.search, props.task);
+    } else if (props.search === "") {
+        if (props.display === "unfinished") {
+            displaytodo = props.task.filter(todo => !todo.complete);
+        } else if (props.display === "completed") {
+            displaytodo = props.task.filter(todo => todo.complete);
+        }
+    }
     return (
-        <TodoList {...props} />
+        <TodoList {...props} displaytodo={displaytodo} />
     )
+}
+
+const exeSearch = (search, task) => {
+    let displayarr = [];
+    task.map((todo, index) => {
+        if (todo.spec.includes(search)) {
+            displayarr.unshift(todo);
+        }
+    });
+    return displayarr;
 }
 
 const mapStateToProps = state => {
     return {
         task: state.task,
         search: state.search,
+        display: state.display,
     }
 }
 
@@ -28,7 +49,8 @@ const mapDispatchToProps = dispatch => {
         }),
         completeTask: (key) => dispatch({ type: actionTypes.COMPLETE_TODO, payload: { key: key } }),
         removeTask: (todo) => dispatch({ type: actionTypes.REMOVE_TODO, payload: { todo: todo } }),
-        handleAll: (option) => dispatch({ type: actionTypes.HANDLE_ALL, payload: { option: option } })
+        handleAll: (option) => dispatch({ type: actionTypes.HANDLE_ALL, payload: { option: option } }),
+        handleDisplay: (display) => dispatch({ type: actionTypes.CHANGE_DISPLAY, payload: { display: display } })
     }
 }
 
