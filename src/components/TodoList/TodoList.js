@@ -1,6 +1,5 @@
 import React from 'react';
-import TodoForm from '../TodoForm/TodoForm';
-import Todo from '../Todo/Todo';
+import TodoContainer from '../Todo/TodoContainer';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -57,7 +56,7 @@ class TodoList extends React.Component {
                     <Grid container justify="flex-start">
                         {this.props.displaytodo.map(todo => (
                             <Grid item xs={3}>
-                                <Todo
+                                <TodoContainer
                                     key={todo.key}
                                     todo={todo}
                                     onComplete={() => this.props.completeTask(todo.key)}

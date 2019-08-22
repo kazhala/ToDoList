@@ -34,20 +34,6 @@ const TodoFormContainer = props => {
             );
         }
     }
-    const handleChange = (e, props) => {
-        const text = e.target.value;
-        props.handleText(text);
-    }
-    const handleSubmit = (e, props) => {
-        e.preventDefault();
-        const todo = {
-            key: shortid.generate(),
-            spec: props.text,
-            complete: false,
-        }
-        props.onSubmit(todo);
-        props.resetText();
-    }
     return (
         <TodoForm {...props} allB={allB} handleChange={handleChange} handleSubmit={handleSubmit} />
     );
@@ -67,3 +53,22 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoFormContainer);
+
+
+const handleSubmit = (e, props) => {
+    e.preventDefault();
+    const todo = {
+        key: shortid.generate(),
+        spec: props.text,
+        complete: false,
+    }
+    props.onSubmit(todo);
+    props.resetText();
+}
+
+const handleChange = (e, props) => {
+    const text = e.target.value;
+    props.handleText(text);
+}
+
+
