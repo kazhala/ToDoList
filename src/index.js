@@ -4,6 +4,13 @@ import Header from './layout/Header';
 import TodoList from './layout/TodoList';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './redux/reducer';
+
+const store = createStore(reducer);
+
+
 
 //index component to display the page to html
 class App extends React.Component {
@@ -41,4 +48,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

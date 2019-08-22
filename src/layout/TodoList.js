@@ -4,59 +4,19 @@ import Todo from '../components/Todo';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import * as actionTypes from '../redux/types';
+import { connect } from 'react-redux';
 
 //display all the created task
-export default class TodoList extends React.Component {
-    constructor(props) {
-        super(props);
-        //store tasks in an array
-        //display for display option control
-        this.state = {
-            task: [],
-            display: "unfinished",
-        };
-    }
-
-    //add task, copy the array from state, modify then set state
-    addTask = (todo) => {
-        let newTask = this.state.task.slice();
-        newTask.unshift(todo);
-        this.setState({
-            task: newTask,
-        });
-    }
-
-    //handle the completed taks, mark them as completed
-    handleComplete = (key) => {
-        this.setState({
-            task: this.state.task.map(todo => {
-                if (todo.key === key) {
-                    return ({
-                        key: todo.key,
-                        spec: todo.spec,
-                        complete: !todo.complete,
-                    });
-                } else {
-                    return todo;
-                }
-            })
-        });
+class TodoList extends React.Component {
+    state = {
+        display: "unfinished",
     }
 
     //change the display in state to the given parameter
     handleDisplay = (display) => {
         this.setState({
             display: display,
-        });
-    }
-
-    //using the splice to remove the exact object from task array
-    handleRemove = (todo) => {
-        let temptask = this.state.task.slice();
-        let index = temptask.indexOf(todo);
-        temptask.splice(index, 1);
-        this.setState({
-            task: temptask,
         });
     }
 
@@ -72,39 +32,6 @@ export default class TodoList extends React.Component {
         return displayarr;
     }
 
-    //handle complete all function, change all task to completed
-    //handle remove all function, only keep all the uncompleted function
-    handleAll = (option) => {
-        if (option === "complete") {
-            let allArr = [];
-            allArr = this.state.task.map(todo => {
-                if (!todo.complete) {
-                    return ({
-                        key: todo.key,
-                        spec: todo.spec,
-                        complete: !todo.complete
-                    });
-                } else {
-                    return todo;
-                }
-            });
-            this.setState({
-                task: allArr,
-            });
-        } else if (option === "remove") {
-            let removetask = [];
-            this.state.task.map(todo => {
-                if (!todo.complete) {
-                    removetask.unshift(todo);
-                }
-            });
-            this.setState({
-                task: removetask,
-            });
-        }
-
-    }
-
     render() {
         //if search is empty, display based on display option
         //if search contains a string, display only the task that contains the substring
@@ -113,9 +40,9 @@ export default class TodoList extends React.Component {
             displaytodo = this.exeSearch(this.props.search);
         } else if (this.props.search === "") {
             if (this.state.display === "unfinished") {
-                displaytodo = this.state.task.filter(todo => !todo.complete);
+                displaytodo = this.props.task.filter(todo => !todo.complete);
             } else if (this.state.display === "completed") {
-                displaytodo = this.state.task.filter(todo => todo.complete);
+                displaytodo = this.props.task.filter(todo => todo.complete);
             }
         }
         return (
@@ -154,10 +81,10 @@ export default class TodoList extends React.Component {
                 <div>
                     {/* Todo form component to handle input */}
                     <TodoForm
-                        task={this.state.task}
+                        task={this.props.task}
                         display={this.state.display}
-                        onSubmit={this.addTask}
-                        completeAll={this.handleAll}
+                        onSubmit={this.props.addTask}
+                        completeAll={this.props.handleAll}
                     />
                 </div>
                 <div>
@@ -168,9 +95,9 @@ export default class TodoList extends React.Component {
                                 <Todo
                                     key={todo.key}
                                     todo={todo}
-                                    onComplete={() => this.handleComplete(todo.key)}
+                                    onComplete={() => this.props.completeTask(todo.key)}
                                     display={this.state.display}
-                                    onRemove={() => this.handleRemove(todo)}
+                                    onRemove={() => this.props.removeTask(todo)}
                                 />
                             </Grid>
                         ))}
@@ -182,3 +109,27 @@ export default class TodoList extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        task: state.task,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addTask: (todo) => dispatch({
+            type: actionTypes.ADD_TODO,
+            payload: {
+                key: todo.key,
+                spec: todo.spec,
+                complete: todo.complete
+            }
+        }),
+        completeTask: (key) => dispatch({ type: actionTypes.COMPLETE_TODO, payload: { key: key } }),
+        removeTask: (todo) => dispatch({ type: actionTypes.REMOVE_TODO, payload: { todo: todo } }),
+        handleAll: (option) => dispatch({ type: actionTypes.HANDLE_ALL, payload: { option: option } })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

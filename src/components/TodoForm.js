@@ -3,7 +3,6 @@ import shortid from 'shortid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import SplitButton from '../layout/SplitButton';
 
 //set the state of initial value for the input field to empty
 export default class TodoForm extends React.Component {
