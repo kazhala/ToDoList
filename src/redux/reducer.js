@@ -2,6 +2,7 @@ import * as actionTypes from './types';
 
 const initialstate = {
     task: [],
+    search: ''
 };
 
 const reducer = (state = initialstate, action) => {

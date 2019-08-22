@@ -1,11 +1,10 @@
 import React from 'react';
-import TodoForm from '../components/TodoForm';
-import Todo from '../components/Todo';
+import TodoForm from '../TodoForm/TodoForm';
+import Todo from '../Todo/Todo';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import * as actionTypes from '../redux/types';
-import { connect } from 'react-redux';
+
 
 //display all the created task
 class TodoList extends React.Component {
@@ -22,6 +21,7 @@ class TodoList extends React.Component {
 
     //handle search function
     //search for all the task if the given parameter is a sub string
+
     exeSearch = (search) => {
         let displayarr = [];
         this.state.task.map((todo, index) => {
@@ -31,6 +31,7 @@ class TodoList extends React.Component {
         });
         return displayarr;
     }
+
 
     render() {
         //if search is empty, display based on display option
@@ -110,26 +111,5 @@ class TodoList extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        task: state.task,
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addTask: (todo) => dispatch({
-            type: actionTypes.ADD_TODO,
-            payload: {
-                key: todo.key,
-                spec: todo.spec,
-                complete: todo.complete
-            }
-        }),
-        completeTask: (key) => dispatch({ type: actionTypes.COMPLETE_TODO, payload: { key: key } }),
-        removeTask: (todo) => dispatch({ type: actionTypes.REMOVE_TODO, payload: { todo: todo } }),
-        handleAll: (option) => dispatch({ type: actionTypes.HANDLE_ALL, payload: { option: option } })
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;
