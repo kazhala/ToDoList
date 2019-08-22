@@ -1,5 +1,5 @@
 import React from 'react';
-import * as actionTypes from '../../redux/types';
+import * as actionTypes from './redux/types';
 import { connect } from 'react-redux';
 import App from './App';
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSearch: () => dispatch({ type: actionTypes.UPDATE_SEARCH, payload: { search: search } })
+        handleSearch: (search) => dispatch({ type: actionTypes.UPDATE_SEARCH, payload: { search: search } })
     }
 }
 

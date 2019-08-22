@@ -24,7 +24,7 @@ class TodoList extends React.Component {
 
     exeSearch = (search) => {
         let displayarr = [];
-        this.state.task.map((todo, index) => {
+        this.props.task.map((todo, index) => {
             if (todo.spec.includes(search)) {
                 displayarr.unshift(todo);
             }
