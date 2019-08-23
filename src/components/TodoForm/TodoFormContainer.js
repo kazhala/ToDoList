@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoForm from './TodoForm';
-import * as actionTypes from '../../redux/types';
+import { todoAction } from '../../redux/index';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import shortid from 'shortid';
@@ -47,8 +47,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleText: (text) => dispatch({ type: actionTypes.UPDATE_TEXT, payload: { text: text } }),
-        resetText: () => dispatch({ type: actionTypes.RESET_TEXT })
+        handleText: (text) => dispatch(todoAction.updatetext(text)),
+        resetText: () => dispatch(todoAction.resettext())
     }
 }
 

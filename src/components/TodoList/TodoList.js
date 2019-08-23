@@ -55,7 +55,7 @@ class TodoList extends React.Component {
                     {/* Display the list of task in this div */}
                     <Grid container justify="flex-start">
                         {this.props.displaytodo.map(todo => (
-                            <Grid item xs={3}>
+                            <Grid item xs={3} key={todo.key}>
                                 <TodoContainer
                                     key={todo.key}
                                     todo={todo}

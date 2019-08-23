@@ -9,7 +9,7 @@ export default class TodoForm extends React.Component {
         return (
             <div>
                 <form onSubmit={(e) => this.props.handleSubmit(e, this.props)}>
-                    <Grid container xs={12}>
+                    <Grid container>
                         <Grid item xs={3}></Grid>
                         <Grid item>
                             <TextField
