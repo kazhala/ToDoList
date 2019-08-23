@@ -1,4 +1,3 @@
-import React from 'react';
 import textReducer from './text/reducer';
 import displayReducer from './display/reducer';
 import searchReducer from './search/reducer';

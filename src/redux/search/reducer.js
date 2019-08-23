@@ -11,8 +11,9 @@ const reducer = (state = initialstate, action) => {
                 ...state,
                 search: action.payload.search
             }
+        default:
+            return state;
     }
-    return state;
 };
 
 export default reducer;

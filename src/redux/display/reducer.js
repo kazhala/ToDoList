@@ -11,8 +11,9 @@ const reducer = (state = initialstate, action) => {
                 ...state,
                 display: action.payload.display
             }
+        default:
+            return state;
     }
-    return state;
 };
 
 export default reducer;

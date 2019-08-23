@@ -61,8 +61,9 @@ const reducer = (state = initialstate, action) => {
                 ...state,
                 task: allArr
             }
+        default:
+            return state;
     }
-    return state;
 };
 
 export default reducer;
