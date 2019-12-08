@@ -8,6 +8,4 @@ The redux-learn verison of this app is delopyed through surge. You could try thi
 
 If you would like to play around the code locally, first clone the branch and run "npm install" on the command line, then start the application using "npm start" at the command line.
 
-THE COTRIBUTION FOR THIS PROJECT IS A BIT OFF BECAUSE I FORGOT TO SET UP LOCAL GIT EMAIL....
-
 Enjoy :)
